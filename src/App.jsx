@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container, H1, Equals } from './App.styled';
+import HeaderUAH from './components/HeaderForUAH/HeaderUAH';
 import CurrencyRow from './components/CurrencyRow/CurrencyRow';
 
 const BASE_URL = 'https://api.frankfurter.app/latest';
 
 export function App() {
-  const [currencyOptions, setCurrencyOptins] = useState([]);
+  const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
   const [exchangeRate, setExchangeRate] = useState();
@@ -29,7 +30,7 @@ export function App() {
       .then(data => {
         const firstCurrency = Object.keys(data.rates)[0];
 
-        setCurrencyOptins([data.base, ...Object.keys(data.rates)]);
+        setCurrencyOptions([data.base, ...Object.keys(data.rates)]);
         setFromCurrency(data.base);
         setToCurrency(firstCurrency);
         setExchangeRate(data.rates[firstCurrency]);
@@ -56,24 +57,27 @@ export function App() {
   }
 
   return (
-    <Container>
-      <H1>Convert</H1>
-      <CurrencyRow
-        currencyOptions={currencyOptions}
-        selectedCurrency={fromCurrency}
-        onChangeCurrency={e => setFromCurrency(e.target.value)}
-        onChangeAmount={handleFromChangeAmount}
-        amount={fromAmount}
-      />
-      <Equals>to</Equals>
-      <CurrencyRow
-        currencyOptions={currencyOptions}
-        selectedCurrency={toCurrency}
-        onChangeCurrency={e => setToCurrency(e.target.value)}
-        onChangeAmount={handleToChangeAmount}
-        amount={toAmount}
-      />
-    </Container>
+    <>
+      <HeaderUAH />
+      <Container>
+        <H1>Конвертуйте</H1>
+        <CurrencyRow
+          currencyOptions={currencyOptions}
+          selectedCurrency={fromCurrency}
+          onChangeCurrency={e => setFromCurrency(e.target.value)}
+          onChangeAmount={handleFromChangeAmount}
+          amount={fromAmount}
+        />
+        <Equals>до</Equals>
+        <CurrencyRow
+          currencyOptions={currencyOptions}
+          selectedCurrency={toCurrency}
+          onChangeCurrency={e => setToCurrency(e.target.value)}
+          onChangeAmount={handleToChangeAmount}
+          amount={toAmount}
+        />
+      </Container>
+    </>
   );
 }
 

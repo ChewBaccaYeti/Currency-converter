@@ -37,4 +37,5 @@ export const H1 = styled.h1`
 export const Equals = styled.div`
   font-weight: bold;
   font-size: 2rem;
+  margin-bottom: 0.5rem;
 `;
