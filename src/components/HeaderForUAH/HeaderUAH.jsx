@@ -24,7 +24,7 @@ const HeaderUAH = () => {
 
   return (
     <Header>
-      <h2> Офіційний курс гривні до</h2>
+      <h2> Офіційний курс українськой гривні до доллару США</h2>
       <div>
         <p>USD к UAH: {usdToUah}</p>
         <p>EUR к UAH: {eurToUah}</p>
