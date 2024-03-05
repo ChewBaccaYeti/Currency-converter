@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Header } from './HeaderUAH.styled';
 
 const HeaderUAH = () => {
+  const exchange = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'
   const [usdToUah, setUsdToUah] = useState(null);
   const [eurToUah, setEurToUah] = useState(null);
 
   useEffect(() => {
-    fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
+    fetch(`${exchange}`)
       .then(response => response.json())
       .then(data => {
         const usdRate = data.find(item => item.cc === 'USD');
